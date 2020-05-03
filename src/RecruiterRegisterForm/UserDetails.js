@@ -4,30 +4,56 @@ import { TextField, Grid } from "@material-ui/core";
 import { isWidthDown } from "@material-ui/core/withWidth";
 //CONTEXT
 import { UserContext } from "./UserContext";
+import Autocomplete from 'react-google-autocomplete';
+
+export function handleGoogleChange (event) {
+  const code = parseInt(event.address_components[7].long_name);
+  const state = event.address_components[5].short_name;
+  const address = event.address_components[0].long_name + ' ' + event.address_components[1].long_name;
+  const country = event.address_components[6].short_name;
+  const city = event.address_components[2].short_name;
+  this.setState({
+    "personal_street_address": address,
+    "personal_city": city,
+    "personal_state": state,
+    "personal_postal": code,
+    "personal_country": country,
+  })
+}
 
 export default props => {
   const [state] = useContext(UserContext);
   const { user, errors } = state;
   const dateLimit = new Date();
   dateLimit.setFullYear(dateLimit.getFullYear() - 18);
+  
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <TextField
-          placeholder='Type your username here'
-          name='username'
-          label='Username'
-          value={user.username}
+          placeholder='Type your first name here'
+          name='first_name'
+          label='First name'
+          value={user.first_name}
           variant='outlined'
           InputLabelProps={{
             shrink: true
           }}
-          required
-          inputProps={{
-            minLength: 3,
-            maxLength: 20
+          error={!!errors["first_name"]}
+          fullWidth
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <TextField
+          placeholder='Type your last name here'
+          name='last_name'
+          label='Last name'
+          value={user.last_name}
+          variant='outlined'
+          InputLabelProps={{
+            shrink: true
           }}
-          error={!!errors["username"]}
+          error={!!errors["first_name"]}
           fullWidth
         />
       </Grid>
@@ -112,6 +138,17 @@ export default props => {
           required
           fullWidth
         />
+      </Grid>
+
+      <Grid item xs={12} lg={6}> 
+      <Autocomplete
+                  style={{width: '50%'}}
+                  onPlaceSelected={(place) => {
+                    console.log(place);
+                    this.handleGoogleChange(place);
+                  }}
+                  types={['geocode', 'establishment']}
+                  componentRestrictions={{country: "us"}}/>  
       </Grid>
     </Grid>
   );

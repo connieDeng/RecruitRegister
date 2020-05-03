@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 export default props => {
   const classes = useStyles();
   const [state] = useContext(UserContext);
-  const { username, email, birthdate, bio, website } = state.user;
+  const { first_name, last_name, email, birthdate, bio, website } = state.user;
   return (
     <Fragment>
       <Grid container className={classes.summary}>
@@ -30,8 +30,12 @@ export default props => {
         </Grid>
 
         <Grid item xs={12}>
-          <Typography variant='h6'>Username</Typography>
-          <Typography variant='body2'>{username}</Typography>
+          <Typography variant='h6'>First name</Typography>
+          <Typography variant='body2'>{first_name}</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant='h6'>Last name</Typography>
+          <Typography variant='body2'>{last_name}</Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography variant='h6'>Email</Typography>

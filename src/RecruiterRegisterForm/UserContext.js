@@ -4,10 +4,16 @@ export const UserContext = createContext([{}, () => {}]);
 export default props => {
   const [state, setState] = useState({
     user: {
-      username: "",
+      first_name: "",
+      last_name: "",
       email: "",
       password: "",
       confirmPassword: "",
+      personal_street_address: '',
+      personal_state: '',
+      personal_city: '',
+      personal_postal: 0,
+      personal_country: '',
       birthdate: new Date().toISOString().slice(0, 10),
       bio: "",
       website: "",

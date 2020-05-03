@@ -2,11 +2,11 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 //REGISTER FORM
-import RegisterForm from "./RegisterForm";
+import RegisterForm from "./RecruiterRegisterForm";
 //HEADER
 import Typography from "@material-ui/core/Typography";
 //CONTEXT
-import UserContextProvider from "./RegisterForm/UserContext";
+import UserContextProvider from "./RecruiterRegisterForm/UserContext";
 const useStyles = makeStyles(theme => ({
   root: {
     minHeight: "100vh",

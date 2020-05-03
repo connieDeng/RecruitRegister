@@ -82,7 +82,9 @@ export default props => {
     e.preventDefault();
     if (activeStep < steps.length - 1) handleNext();
     else {
-      setCompleted(true);
+      alert("reached here");
+      //alert(state.user);
+      setCompleted();
     }
   };
 
